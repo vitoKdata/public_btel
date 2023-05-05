@@ -1,0 +1,5 @@
+numpy
+vowpalwabbit
+streamlit
+snowflake-snowpark-python==1.3.0
+
