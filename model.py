@@ -60,7 +60,7 @@ database = st.secrets.["database"]
 
 def create_snowflake_connection():
     """Create Snowpark session object"""
-    connection_parameters = st.secrets["snowflake"]
+    connection_parameters = st.secrets
     conn = Session.builder.configs(connection_parameters).create()
     return conn
 
