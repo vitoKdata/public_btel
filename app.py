@@ -152,7 +152,7 @@ def recommending_cb(bandit, vowpal_workspace):
         bandit_loop.reset_index(inplace=True, drop=True)
 
         daten =[
-        vowpal_wabit_context_string(context_dict[0])[0],
+        vowpal_wabit_context_string(list(my_dict.items())[0]),
             
 
         ]
