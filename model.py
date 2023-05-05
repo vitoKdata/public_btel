@@ -52,10 +52,10 @@ def vowpal_wabit_context_string(user_feature_dict):
 
 
 
-account = st.secrets.snowflake["account"] 
-username = st.secrets.snowflake["user"] 
-password = st.secrets.snowflake["password"] 
-database = st.secrets.snowflake["database"] 
+account = st.secrets.["account"] 
+username = st.secrets.["user"] 
+password = st.secrets.["password"] 
+database = st.secrets.["database"] 
 
 
 def create_snowflake_connection():
