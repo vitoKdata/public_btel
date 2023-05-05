@@ -14,7 +14,7 @@ def bandit_data_set_grundstruktur(bandit_dataset, placeID):
     bandit_dataset['Action'] =bandit_dataset[placeID] 
     bandit_dataset['Action_nr'] =bandit_dataset[placeID] 
     bandit_dataset['prob_action'] = np.random.rand(len(bandit_dataset))
-    new_id_df = pd.DataFrame({placeID: bandit_dataset[placeID].unique(),
+    new_id_df = pd.DataFrame({placeID: bandit_dataset[placeID].uniqueto
                             'new_ID': range(1, 113)})
     merged_df = pd.merge(bandit_dataset, new_id_df, on=placeID)
     bandit_dataset = merged_df
@@ -94,7 +94,7 @@ def training_cb(bandit, vowpal_workspace, filename):
     for i in bandit.generatedID.unique():
         bandit_loop = bandit[bandit['generatedID'] == i]
         context = bandit_loop[['VALIDATED_PARKING',  'MON_TUE_WED_THU_FRI', 'SAT', 'SUN','YES', 'BAKERY', 'BAR', 'BAR_PUB_BREWERY', 'BARBECUE', 'BREAKFAST_BRUNCH', 'MEXICAN', 'VEGETARIAN', 'INTERNATIONAL', ]].iloc[:1]
-        context_dict = context.to_dict(orient="dict")
+        context_dict = context.to_dict()
         bandit_loop.reset_index(inplace=True, drop=True)
         prob_action = bandit_loop.prob_action
         reward = bandit_loop.RATING * -1
@@ -118,7 +118,7 @@ def recommending_cb(bandit, vowpal_workspace):
     for i in bandit.generatedID.unique():
         bandit_loop = bandit[bandit['generatedID'] == i]
         context = bandit_loop[['VALIDATED_PARKING',  'MON_TUE_WED_THU_FRI', 'SAT', 'SUN', 'YES', 'BAKERY', 'BAR', 'BAR_PUB_BREWERY', 'BARBECUE', 'BREAKFAST_BRUNCH', 'MEXICAN', 'VEGETARIAN', 'INTERNATIONAL', ]].iloc[:1]
-        context_dict = context.to_dict(orient="dict")
+        context_dict = context.to_dict()
         bandit_loop.reset_index(inplace=True, drop=True)
 
         daten =[
