@@ -124,7 +124,7 @@ def training_cb(bandit, vowpal_workspace, filename):
     for i in bandit.generatedID.unique():
         bandit_loop = bandit[bandit['generatedID'] == i]
         context = bandit_loop[['VALIDATED_PARKING',  'MON_TUE_WED_THU_FRI', 'SAT', 'SUN','YES', 'BAKERY', 'BAR', 'BAR_PUB_BREWERY', 'BARBECUE', 'BREAKFAST_BRUNCH', 'MEXICAN', 'VEGETARIAN', 'INTERNATIONAL', ]].iloc[:1]
-        context_dict = context.to_dict(orient='records')[0]
+        context_dict = context.to_dict(orient='records')
         bandit_loop.reset_index(inplace=True, drop=True)
         prob_action = bandit_loop.prob_action
         reward = bandit_loop.RATING * -1
@@ -148,7 +148,7 @@ def recommending_cb(bandit, vowpal_workspace):
     for i in bandit.generatedID.unique():
         bandit_loop = bandit[bandit['generatedID'] == i]
         context = bandit_loop[['VALIDATED_PARKING',  'MON_TUE_WED_THU_FRI', 'SAT', 'SUN', 'YES', 'BAKERY', 'BAR', 'BAR_PUB_BREWERY', 'BARBECUE', 'BREAKFAST_BRUNCH', 'MEXICAN', 'VEGETARIAN', 'INTERNATIONAL', ]].iloc[:1]
-        context_dict = context.to_dict(orient='records')[0]
+        context_dict = context.to_dict(orient='records')
         bandit_loop.reset_index(inplace=True, drop=True)
 
         daten =[
@@ -301,11 +301,10 @@ with side_bar.form('myform'):
 
 		}
 		df = pd.DataFrame(details.items(), columns=['Category', 'Value'])
-		df = df.transpose()
+		
 		sub = True
-		new_header = df.iloc[0]
-		df = df[1:]
-		df.columns = new_header
+
+		df = df.set_index('Category').T
 		df['MEXICAN'] = np.where(df['Food'] == 'MEXICAN', 1, 0)
 		df['INTERNATIONAL'] = np.where(df['Food'] == 'INTERNATIONAL', 1, 0)
 		df = df.replace({'Yes': 1, 'No': 0})
