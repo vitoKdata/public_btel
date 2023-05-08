@@ -312,9 +312,9 @@ with side_bar.form('myform'):
 		preddd = pyvw.Workspace(f"--cb 112 -i cb.snowflake_bandit")
 		a= recommending_cb(df, preddd)
 		session = create_session_object()
-		snow_df_pce = (session.table("BANDIT.DATA.RATINGS")) 
-		snow_df_pce.show()
-		data = snow_df_pce.to_pandas()
+		snow_df_pce = session.sql("SELECT * FROM BANDIT.DATA.RATINGS").collect() 
+		#snow_df_pce.show()
+		data = pd.DataFrame(snow_df_pce)
 		if "rating2" not in st.session_state:
 			st.session_state.rating2 = None
 		if "submitted2" not in st.session_state:
