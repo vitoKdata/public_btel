@@ -61,10 +61,10 @@ def vowpal_wabit_context_string(user_feature_dict):
 
 
 
-account = st.secrets["snowflake.account"]
-username = st.secrets["snowflake.user"] 
-password = st.secrets["snowflake.password"] 
-database = st.secrets["snowflake.database"] 
+account = st.secrets["snowflake"]["account"]
+username = st.secrets["snowflake"]["user"] 
+password = st.secrets["snowflake"]["password"] 
+database = st.secrets["snowflake"]["database"] 
 
 connection_parameters = {
    "account": account,
@@ -90,7 +90,7 @@ def create_snowflake_connection():
 
 def create_session_object():
     """Create Snowpark session object"""
-    connection_parameters = st.secrets
+    connection_parameters = st.secrets["snowflake"]
     session = Session.builder.configs(connection_parameters).create()
     return session
 
