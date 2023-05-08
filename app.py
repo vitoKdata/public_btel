@@ -366,6 +366,11 @@ with st.expander("Results", expanded=True):
         st.image(f"{df['Image_url'].iloc[0]}", caption="Looks delicious, doesn't it?")
         st.session_state.expander_expanded = True
 
+  # Horizontal bar at the bottom of the page
+    st.markdown("""---""")
+    st.markdown("The code can be found on [GitHub](https://github.com/vitoKdata/public_btel).")
+
+
 
 
 
